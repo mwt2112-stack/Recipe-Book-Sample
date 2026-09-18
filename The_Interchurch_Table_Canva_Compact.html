@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#F4EFE7" />
+<title>The Interchurch Table | Columbia Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F4EFE7; --paper:#FCFAF6; --navy:#0E2B46; --ink:#1E262B; --muted:#6F746F;
+  --blue:#B9D9EB; --blue2:#84B9D6; --brass:#A87F3B; --burgundy:#6B2D38; --walnut:#4B362F;
+  --line:#D9D2C7; --sage:#DDE3D8; --shadow:0 24px 70px rgba(38,34,30,.12);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--ivory);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit} button{cursor:pointer} img{display:block;max-width:100%}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(244,239,231,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(14,43,70,.09)}
+.topbar-inner{max-width:1240px;margin:auto;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--navy)} .brand-mark{width:34px;height:34px;border:1px solid rgba(14,43,70,.18);display:grid;place-items:center;font-weight:700;font-size:11px;letter-spacing:.08em;background:var(--blue)}
+.brand-copy{line-height:1.1}.brand-copy strong{display:block;font-size:12px;letter-spacing:.02em}.brand-copy span{display:block;font:400 11px/1.2 'Fraunces',serif;font-style:italic;color:#587087;margin-top:3px}
+.top-actions{display:flex;align-items:center;gap:10px}.link-btn,.solid-btn{border:0;background:none;color:var(--navy);font-size:11px;font-weight:700;letter-spacing:.04em;padding:10px 13px}.solid-btn{background:var(--navy);color:#fff;border-radius:999px;padding:11px 16px}.solid-btn:hover{background:#173B5D}.link-btn:hover{text-decoration:underline;text-underline-offset:4px}
+.shell{max-width:1240px;margin:auto;padding:0 28px 72px}
+.hero{display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);gap:52px;align-items:center;padding:56px 0 62px}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.22em;font-weight:700;color:var(--burgundy);margin-bottom:16px}.hero h1{font:500 clamp(54px,7vw,94px)/.93 'Fraunces',serif;letter-spacing:-.055em;color:var(--navy);margin:0 0 22px;max-width:7.5ch}
+.hero .lede{font:400 21px/1.5 'Fraunces',serif;color:#4D5452;max-width:630px;margin:0 0 28px}.hero-actions{display:flex;gap:11px;flex-wrap:wrap}.outline-btn{border:1px solid var(--navy);background:transparent;color:var(--navy);border-radius:999px;padding:12px 17px;font-weight:700;font-size:11px}.outline-btn:hover{background:rgba(14,43,70,.05)}
+.hero-photo{position:relative;min-height:610px}.hero-photo img{width:100%;height:610px;object-fit:cover;border-radius:2px 74px 2px 2px;box-shadow:var(--shadow)}
+.hero-card{position:absolute;left:-34px;bottom:34px;width:min(370px,82%);background:#FBF6EC;padding:26px 28px 24px;border:1px solid rgba(168,127,59,.24);box-shadow:0 18px 50px rgba(41,34,25,.16)}
+.hero-card .label{font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:var(--brass);font-weight:700}.hero-card h2{font:500 30px/1.05 'Fraunces',serif;margin:8px 0 8px;color:var(--walnut)}.hero-card p{font:400 15px/1.45 'Fraunces',serif;font-style:italic;color:#66584E;margin:0 0 15px}.text-link{border:0;background:none;padding:0;color:var(--burgundy);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+.rule{border:0;border-top:1px solid var(--line);margin:0}
+.intro-row{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;padding:52px 0 42px}.intro-row h2{font:500 clamp(34px,4vw,56px)/1.02 'Fraunces',serif;color:var(--navy);margin:0;letter-spacing:-.035em}.intro-row p{font-size:15px;line-height:1.75;color:#5D625F;max-width:720px;margin:3px 0 0}
+.moods{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 54px}.mood{border:1px solid #CFC7BB;background:rgba(252,250,246,.7);padding:11px 15px;border-radius:999px;color:#4C5555;font-size:11px;font-weight:700}.mood:hover,.mood.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:0 0 22px}.section-head h2{font:500 clamp(34px,4vw,52px)/1 'Fraunces',serif;color:var(--navy);margin:0;letter-spacing:-.035em}.section-head p{margin:0;color:#77756E;font-size:12px;max-width:430px;text-align:right;line-height:1.5}
+.feature-grid{display:grid;grid-template-columns:1.3fr .7fr .7fr;grid-template-rows:350px 280px;gap:16px;margin-bottom:64px}.recipe-tile{position:relative;overflow:hidden;background:#ddd;isolation:isolate}.recipe-tile:first-child{grid-row:1/3}.recipe-tile img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.recipe-tile:hover img{transform:scale(1.035)}.recipe-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,17,22,.76),rgba(10,17,22,.04) 62%);z-index:1}.tile-copy{position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;color:#fff}.tile-copy small{font-size:9px;text-transform:uppercase;letter-spacing:.16em;font-weight:700;opacity:.78}.tile-copy h3{font:500 25px/1.06 'Fraunces',serif;margin:6px 0 6px}.recipe-tile:first-child .tile-copy h3{font-size:36px}.tile-copy span{font-size:10px;opacity:.82}.tile-btn{position:absolute;inset:0;border:0;background:transparent;z-index:3;color:transparent}
+.collection-tools{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-bottom:20px}.searchbox{position:relative}.searchbox input{width:100%;border:0;border-bottom:1px solid #BFB7AA;background:transparent;padding:12px 2px 12px 34px;outline:none;color:var(--ink)}.searchbox svg{position:absolute;left:2px;top:13px;width:17px;stroke:#817E76}.searchbox input:focus{border-bottom-color:var(--navy)}.count{font-size:11px;color:#77756E}
+.recipe-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}.recipe-row{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);position:relative}.recipe-row:nth-child(odd){padding-right:26px;border-right:1px solid var(--line)}.recipe-row:nth-child(even){padding-left:26px}.recipe-row img{width:180px;height:132px;object-fit:cover}.recipe-row .cat{font-size:8px;text-transform:uppercase;letter-spacing:.16em;color:var(--burgundy);font-weight:700}.recipe-row h3{font:500 24px/1.08 'Fraunces',serif;color:var(--navy);margin:5px 0 7px}.recipe-row p{font-size:11px;line-height:1.5;color:#6D706C;margin:0 0 10px}.meta{display:flex;gap:12px;flex-wrap:wrap;font-size:9px;color:#77756E}.row-btn{position:absolute;inset:0;border:0;background:transparent;color:transparent}
+.story-strip{margin:68px 0 0;background:var(--navy);color:#fff;display:grid;grid-template-columns:.8fr 1.2fr;min-height:360px}.story-strip .left{padding:52px 48px;background:linear-gradient(145deg,#173B5D,#0E2B46)}.story-strip .left .eyebrow{color:var(--blue)}.story-strip h2{font:500 47px/1 'Fraunces',serif;margin:0 0 18px}.story-strip p{font:400 18px/1.5 'Fraunces',serif;color:#DCE7ED;margin:0 0 24px}.story-strip .right{display:grid;place-items:center;padding:40px}.tonight{max-width:520px;width:100%;background:#F3E6CC;color:var(--walnut);padding:34px;transform:rotate(-1deg);box-shadow:0 22px 50px rgba(0,0,0,.25)}.tonight small{font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:#8B6C37}.tonight h3{font:500 32px/1.08 'Fraunces',serif;margin:8px 0}.tonight p{font:400 16px/1.4 'Fraunces',serif;color:#66584E;margin:0 0 20px}
+.share{padding:70px 0 18px;display:grid;grid-template-columns:.85fr 1.15fr;gap:64px}.share h2{font:500 clamp(42px,5vw,70px)/.95 'Fraunces',serif;color:var(--navy);margin:0 0 20px;letter-spacing:-.045em}.share p{font-size:15px;line-height:1.75;color:#636863;max-width:520px}.share-card{background:var(--paper);border:1px solid var(--line);padding:36px;box-shadow:0 18px 50px rgba(50,45,38,.07)}.share-card h3{font:500 28px/1.1 'Fraunces',serif;color:var(--navy);margin:0 0 8px}.share-card p{font-size:12px;line-height:1.6;margin:0 0 20px}.share-card ul{margin:0 0 24px;padding-left:18px;color:#676963;font-size:11px;line-height:1.8}
+footer{max-width:1240px;margin:auto;padding:26px 28px 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:#7E7D77;font-size:10px}
+.modal{position:fixed;inset:0;background:rgba(10,23,33,.78);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-panel{width:min(1180px,100%);max-height:94vh;overflow:auto;background:var(--paper);position:relative;box-shadow:0 40px 120px rgba(0,0,0,.34)}.close{position:sticky;top:16px;float:right;margin:16px 16px 0 0;z-index:4;border:1px solid #D6D0C7;background:#fff;width:38px;height:38px;border-radius:50%;font-size:21px;color:var(--navy)}
+.recipe-detail{display:grid;grid-template-columns:42% 58%;min-height:720px}.detail-photo{position:sticky;top:0;height:94vh;min-height:720px}.detail-photo img{width:100%;height:100%;object-fit:cover}.detail-main{padding:56px 58px 48px}.detail-kicker{font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:var(--burgundy);font-weight:700}.detail-title{font:500 clamp(44px,5vw,68px)/.95 'Fraunces',serif;color:var(--navy);letter-spacing:-.045em;margin:10px 0 12px}.detail-by{font-size:11px;color:#77726B;padding-bottom:20px;border-bottom:1px solid var(--line)}.detail-story{font:400 21px/1.48 'Fraunces',serif;font-style:italic;color:#544E47;margin:28px 0}.detail-facts{display:flex;gap:28px;flex-wrap:wrap;padding:15px 0 25px}.fact span{display:block;font-size:8px;text-transform:uppercase;letter-spacing:.16em;color:#8C877F}.fact strong{display:block;margin-top:4px;color:var(--navy);font-size:12px}.detail-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:42px;margin-top:12px}.detail-grid h4{font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--burgundy);margin:0 0 14px}.ingredients{margin:0;padding-left:18px;display:grid;gap:8px;font-size:12px;line-height:1.5}.steps{display:grid;gap:16px}.step{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:12px;line-height:1.55}.step b{font:500 20px/1 'Fraunces',serif;color:var(--brass)}.secret{margin-top:34px;border-left:3px solid var(--brass);background:#F7F0E4;padding:18px 20px;font:400 16px/1.45 'Fraunces',serif;color:#5B5145}.secret strong{display:block;font:700 9px/1 'DM Sans';text-transform:uppercase;letter-spacing:.16em;color:var(--burgundy);margin-bottom:7px}
+.form-wrap{padding:44px 48px 52px}.form-head{max-width:720px;margin-bottom:28px}.form-head h2{font:500 48px/1 'Fraunces',serif;color:var(--navy);margin:6px 0 12px}.form-head p{font-size:13px;color:#676D69;line-height:1.6}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:#555F61;font-weight:700}.field input,.field select,.field textarea{border:1px solid #D9D2C7;background:#fff;padding:12px 13px;outline:none;border-radius:0;color:var(--ink)}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(185,217,235,.3)}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.status{font-size:11px;color:var(--burgundy);margin-top:12px;min-height:16px;text-align:right}
+@media(max-width:980px){.hero{grid-template-columns:1fr;gap:28px}.hero h1{max-width:9ch}.hero-photo{min-height:500px}.hero-photo img{height:500px}.hero-card{left:20px}.feature-grid{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px 260px}.recipe-tile:first-child{grid-column:1/3;grid-row:auto}.recipe-list{grid-template-columns:1fr}.recipe-row:nth-child(odd),.recipe-row:nth-child(even){padding:22px 0;border-right:0}.story-strip,.share{grid-template-columns:1fr}.recipe-detail{grid-template-columns:1fr}.detail-photo{position:relative;height:420px;min-height:0}.detail-grid{grid-template-columns:1fr 1.2fr}}
+@media(max-width:640px){.topbar-inner,.shell,footer{padding-left:16px;padding-right:16px}.brand-copy span{display:none}.top-actions .link-btn{display:none}.hero{padding-top:34px}.hero h1{font-size:58px}.hero .lede{font-size:18px}.hero-photo,.hero-photo img{height:420px;min-height:420px}.hero-card{left:12px;right:12px;bottom:14px;width:auto;padding:20px}.intro-row{grid-template-columns:1fr;gap:18px;padding:38px 0 28px}.feature-grid{display:grid;grid-template-columns:1fr;grid-template-rows:none}.recipe-tile,.recipe-tile:first-child{grid-column:auto;height:320px}.section-head{align-items:flex-start;flex-direction:column}.section-head p{text-align:left}.collection-tools{grid-template-columns:1fr}.recipe-row{grid-template-columns:120px 1fr}.recipe-row img{width:120px;height:110px}.story-strip .left,.story-strip .right{padding:32px 22px}.share{gap:28px;padding-top:48px}.share-card{padding:26px 22px}.detail-main{padding:38px 22px}.detail-title{font-size:46px}.detail-grid{grid-template-columns:1fr}.form-wrap{padding:36px 20px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:1}.form-head h2{font-size:40px}}
+.landing-cover{position:fixed;inset:0;z-index:5000;background:#F4EFE7;color:#2B211D;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;border:16px solid #FCFAF6;transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .35s cubic-bezier(.16,1,.3,1),visibility .35s ease;font-family:'Fraunces',Georgia,serif}
+.landing-cover::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(255,255,255,.72),transparent 68%),linear-gradient(to bottom,rgba(168,127,59,.045),transparent 38%,rgba(107,45,56,.028));pointer-events:none}
+.landing-cover.open{opacity:0;transform:scale(1.015);visibility:hidden;pointer-events:none}
+.landing-cover>*{position:relative;z-index:1}.landing-kicker{font:700 10px/1 'DM Sans',sans-serif;letter-spacing:.35em;text-transform:uppercase;color:#A87F3B;margin:0 0 28px}.landing-cover h2{font:400 italic clamp(42px,6.5vw,76px)/1.02 'Fraunces',Georgia,serif;letter-spacing:-.025em;max-width:14ch;margin:0;color:#2B211D}.landing-rule{width:48px;height:1px;background:#A87F3B;margin:36px 0 40px}.landing-seal{width:78px;height:78px;border-radius:50%;border:1px solid #C6A66B;background:#FBF6EC;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:landingPulse 3.2s ease-in-out infinite;transition:background .2s ease,border-color .2s ease,transform .2s ease}.landing-seal:hover{background:#6B2D38;border-color:#6B2D38;animation-play-state:paused}.landing-seal svg{width:21px;height:21px;stroke:#A87F3B;transition:stroke .2s ease}.landing-seal:hover svg{stroke:#FBF6EC}.landing-hint{margin:28px 0 0;font:600 10px/1 'DM Sans',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#6E625A}@keyframes landingPulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(168,127,59,.24)}50%{transform:scale(1.04);box-shadow:0 0 0 16px rgba(168,127,59,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(168,127,59,0)}}
+
+@media (min-width: 981px){html{zoom:.8}}
+
+.open-book-toggle{
+  position:fixed;
+  opacity:0;
+  pointer-events:none;
+  width:1px;
+  height:1px;
+}
+.open-book-toggle:checked + .landing-cover{
+  opacity:0;
+  transform:scale(1.015);
+  visibility:hidden;
+  pointer-events:none;
+}
+
+</style>
+</head>
+<body>
+<input type="checkbox" id="openBookToggle" class="open-book-toggle" aria-hidden="true">
+<div class="landing-cover" id="landingCover" aria-label="The Interchurch Table introduction">
+  <p class="landing-kicker">Columbia Engineering at Interchurch</p>
+  <h2>Our Shared Recipe Book</h2>
+  <div class="landing-rule"></div>
+  <label class="landing-seal" id="landingSeal" for="openBookToggle" role="button" tabindex="0" aria-label="Open the recipe book">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2v20M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM8 2v5M16 2v5"/>
+    </svg>
+  </label>
+  <label class="landing-hint" for="openBookToggle">Open the Book</label>
+</div>
+
+<nav class="topbar"><div class="topbar-inner">
+  <div class="brand"><div class="brand-mark">CE</div><div class="brand-copy"><strong>Columbia Engineering</strong><span>The Interchurch Table</span></div></div>
+  <div class="top-actions"><button class="link-btn" id="browseTop">Browse recipes</button><button class="solid-btn" id="shareTop">Share a recipe</button></div>
+</div></nav>
+<main class="shell">
+<section class="hero">
+  <div><div class="eyebrow">Columbia Engineering at Interchurch</div><h1>The Interchurch Table</h1><p class="lede">Recipes, stories, and favorites from the people we work beside every day.</p><div class="hero-actions"><button class="solid-btn" id="exploreBtn">Explore the collection</button><button class="outline-btn" id="surpriseBtn">Tonight, make this</button></div></div>
+  <div class="hero-photo"><img id="featuredImage" alt="Featured dish"><div class="hero-card"><div class="label">This week at the table</div><h2 id="featuredTitle"></h2><p id="featuredStory"></p><button class="text-link" id="featuredOpen">Read the recipe →</button></div></div>
+</section>
+<hr class="rule">
+<section class="intro-row"><h2>Food tells you something about a person.</h2><p>A family staple. A twenty-minute weeknight rescue. The dish everyone asks you to bring. This collection is less about perfect recipes than the people, memories, and little techniques behind them.</p></section>
+<div class="moods" id="moods"></div>
+<section id="collection">
+  <div class="section-head"><h2>From our kitchens</h2><p>Browse the collection, meet the cooks, and find something worth making.</p></div>
+  <div class="feature-grid" id="featureGrid"></div>
+  <div class="collection-tools"><div class="searchbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="search" placeholder="Search a dish, person, ingredient, or origin"></div><div class="count" id="count"></div></div>
+  <div class="recipe-list" id="recipeList"></div>
+</section>
+<section class="story-strip">
+  <div class="left"><div class="eyebrow">A little less scrolling</div><h2>Not sure what to make?</h2><p>Let the table choose for you. One dish, one recommendation, no decision fatigue.</p><button class="solid-btn" id="chooseAgain">Choose for me</button></div>
+  <div class="right"><div class="tonight"><small>Tonight, make this</small><h3 id="tonightTitle"></h3><p id="tonightStory"></p><button class="text-link" id="tonightOpen">Let's cook →</button></div></div>
+</section>
+<section class="share" id="shareSection">
+  <div><div class="eyebrow">Pull up a chair</div><h2>Bring something to the table.</h2><p>Have a family recipe, cultural favorite, weeknight standby, or dish people always ask you for? Share it in the same clean format as the rest of the collection.</p></div>
+  <div class="share-card"><h3>Your recipe, standardized.</h3><p>One short form captures everything needed to turn your contribution into a polished cookbook entry.</p><ul><li>Recipe name, category, culture/origin, and timing</li><li>Ingredients entered one per line</li><li>Directions entered one step per line</li><li>The story behind the dish and your best tip</li><li>A photo of the actual finished dish</li></ul><button class="solid-btn" id="shareMain">Share a recipe</button></div>
+</section>
+</main>
+<footer><span>Columbia Engineering · Interchurch</span><span>From our kitchens to the table.</span></footer>
+
+<div class="modal" id="recipeModal"><div class="modal-panel"><button class="close" id="closeRecipe">×</button><div id="recipeBody"></div></div></div>
+<div class="modal" id="shareModal"><div class="modal-panel"><button class="close" id="closeShare">×</button><div class="form-wrap"><div class="form-head"><div class="eyebrow">Contribute to the collection</div><h2>Share your recipe.</h2><p>We’ll format what you enter into a consistent cookbook submission. On supported devices, “Send Recipe” opens your native share sheet so you can send it by email, Teams, Messages, or another app.</p></div>
+<form id="recipeForm"><div class="form-grid">
+<div class="field"><label>Recipe name *</label><input id="fTitle" required></div><div class="field"><label>Your name *</label><input id="fAuthor" required></div>
+<div class="field"><label>Department / team</label><input id="fDept"></div><div class="field"><label>Category *</label><select id="fCategory" required><option>Dinner</option><option>Breakfast</option><option>Lunch</option><option>Appetizers</option><option>Desserts</option><option>Drinks</option><option>Other</option></select></div>
+<div class="field"><label>Culture / origin</label><input id="fOrigin" placeholder="e.g. Jamaican, Southern, family recipe"></div><div class="field"><label>Servings</label><input id="fServings" placeholder="e.g. 4"></div>
+<div class="field"><label>Prep time</label><input id="fPrep" placeholder="e.g. 15 min"></div><div class="field"><label>Cook time</label><input id="fCook" placeholder="e.g. 35 min"></div>
+<div class="field full"><label>Ingredients * · one per line</label><textarea id="fIngredients" required></textarea></div><div class="field full"><label>Preparation * · one step per line</label><textarea id="fSteps" required></textarea></div>
+<div class="field full"><label>The story behind it</label><textarea id="fStory"></textarea></div><div class="field full"><label>Your secret / best tip</label><textarea id="fSecret"></textarea></div>
+<div class="field full"><label>Photo of the finished dish</label><input id="fPhoto" type="file" accept="image/*"></div>
+</div><div class="form-actions"><button type="button" class="outline-btn" id="copyRecipe">Copy recipe</button><button type="submit" class="solid-btn">Send recipe</button></div><div class="status" id="shareStatus"></div></form>
+</div></div></div>
+<script>
+const RECIPES = [
+  {
+    "id": "vegan-bang-bang-cauliflower",
+    "title": "Bang Bang Cauliflower",
+    "author": "Anonymous",
+    "department": "",
+    "category": "Appetizers",
+    "prep": "20 min",
+    "cook": "15 min",
+    "servings": "4",
+    "origin": "Vegan",
+    "story": "Crispy cauliflower bites with a sweet, creamy chili sauce - crunchy on the outside, tender inside, and easy to make in either the oven or air fryer.",
+    "secret": "Keep the florets in a single layer with a little space between them. Crowding traps steam and makes the coating softer instead of crisp.",
+    "ingredients": [
+      "1 head cauliflower, cut into bite-size florets",
+      "3/4 cup all-purpose flour, regular or gluten-free",
+      "1/2 cup cornstarch",
+      "3/4 cup unsweetened almond milk or other unsweetened plant milk",
+      "2 tsp lemon juice or apple cider vinegar",
+      "1 tbsp sambal oelek, sriracha, or other chili paste",
+      "1 tsp garlic powder",
+      "1/2 tsp onion powder",
+      "1/2 tsp sea salt",
+      "1/2 tsp black pepper",
+      "1 cup panko breadcrumbs, lightly seasoned",
+      "1/2 cup vegan mayonnaise",
+      "1/4 cup sambal oelek or sriracha",
+      "2 tbsp maple syrup or agave",
+      "Sesame seeds and sliced scallions, for finishing"
+    ],
+    "steps": [
+      "Heat the oven to 450°F. Line a sheet pan with parchment or lightly grease it. For an air fryer, preheat to 400°F.",
+      "Whisk the flour, cornstarch, plant milk, lemon juice or vinegar, 1 tablespoon chili paste, garlic powder, onion powder, salt, and pepper into a thick batter. Add a splash more plant milk if needed so it coats easily without running off.",
+      "Place the panko in a second bowl. Coat the cauliflower in the batter, then press each piece into the breadcrumbs until evenly covered.",
+      "Arrange the florets in a single layer with space between them. Bake for about 22 minutes, until crisp and deeply golden. For the air fryer, cook 12-15 minutes, shaking halfway through.",
+      "While the cauliflower cooks, whisk together the vegan mayonnaise, 1/4 cup chili paste, and maple syrup until smooth and creamy.",
+      "Gently toss the hot cauliflower with enough bang bang sauce to coat. Return it to the oven or air fryer for 1-2 minutes so the sauce sets slightly.",
+      "Finish with sesame seeds and sliced scallions and serve immediately, with extra sauce on the side if you like."
+    ],
+    "file": "https://jessicainthekitchen.com/wp-content/uploads/2020/04/Vegan-Bang-Bang-Cauliflower-Wings-4.jpg",
+    "source": "https://jessicainthekitchen.com/bang-bang-cauliflower-vegan/"
+  },
+  {
+    "id": "pull-apart-chicken-tacos",
+    "title": "Pull Apart Chicken Tacos",
+    "author": "Anonymous",
+    "department": "",
+    "category": "Dinner",
+    "prep": "15 min",
+    "cook": "30 min",
+    "servings": "8",
+    "origin": "Taco Night",
+    "story": "Juicy shredded chicken, peppers, onions, melted mozzarella, and crisp tortillas come together in an easy taco-night favorite built for sharing.",
+    "secret": "Dip each tortilla lightly in the tomato-rich chicken sauce before crisping it in the skillet - it adds flavor and helps the outside turn beautifully golden.",
+    "ingredients": [
+      "1 lb chicken breast",
+      "1 red bell pepper, sliced into strips",
+      "1 green bell pepper, sliced into strips",
+      "1 cup purple onion, sliced into strips",
+      "1 tbsp garlic and herb seasoning",
+      "1 tbsp chicken bouillon",
+      "1 tbsp white pepper",
+      "1 (15 oz) can crushed tomatoes",
+      "1 cup low-sodium chicken stock",
+      "1 tbsp Cajun seasoning",
+      "1 tbsp paprika",
+      "1 tbsp onion powder",
+      "1 tbsp garlic powder",
+      "1 tbsp adobo seasoning",
+      "Olive oil, for sautéing",
+      "Flour tortillas",
+      "Shredded mozzarella cheese",
+      "Fresh cilantro, optional",
+      "Diced red onion, optional",
+      "1 cup sour cream",
+      "2 tbsp salsa",
+      "1 tsp taco seasoning"
+    ],
+    "steps": [
+      "Cover the chicken with low-sodium chicken stock in a large pot. Season with chicken bouillon, garlic and herb seasoning, and white pepper, then gently boil until the chicken reaches 165°F, about 15 minutes.",
+      "Let the chicken cool slightly, then shred it with two forks.",
+      "Heat a little olive oil in a large skillet. Sauté the red and green peppers with the purple onion for 6–8 minutes, until softened.",
+      "Add the shredded chicken and crushed tomatoes. Pour in the low-sodium chicken stock, then season with Cajun seasoning, paprika, onion powder, garlic powder, and adobo. Simmer for 6–7 minutes.",
+      "Lightly dip a flour tortilla in the tomato sauce, then place it in a clean skillet. Add mozzarella, chicken filling, diced red onion, and cilantro.",
+      "Fold the tortilla and cook for 1–2 minutes per side, until crisp and golden. Repeat with the remaining tacos.",
+      "For the dip, stir together sour cream, salsa, and taco seasoning until smooth. Serve alongside the warm tacos."
+    ],
+    "file": "https://recipesbyleah.com/uploads/recipes/thumbs/large/tender-pulled-chicken-tacos-recipe-a-weeknight-favorite_large.webp",
+    "source": "https://www.youtube.com/shorts/iEzZkf069S4"
+  },
+  {
+    "id": "honey-bbq-wings-ab",
+    "title": "Honey BBQ Wings",
+    "author": "Anonymous",
+    "department": "",
+    "category": "Appetizers",
+    "prep": "15 min",
+    "cook": "45 min",
+    "servings": "6",
+    "origin": "American BBQ",
+    "story": "Oven-baked wings with a bold dry seasoning blend and a sticky honey-BBQ glaze - easy enough for a weeknight and made for sharing.",
+    "secret": "Dry the wings well before seasoning, and let the sauce simmer while the chicken finishes so the glaze has time to thicken.",
+    "ingredients": [
+      "3.5 - 4 lb chicken wings",
+      "Olive oil, enough to lightly coat",
+      "1.5 tsp black pepper",
+      "1.5 tsp onion powder",
+      "1.5 tsp chili powder",
+      "1.5 tsp smoked paprika",
+      "1.5 tsp garlic powder",
+      "1.5 tsp Italian seasoning",
+      "1.5 tsp Sazón seasoning",
+      "1/4 cup butter, melted",
+      "1 cup BBQ sauce",
+      "1/2 cup honey",
+      "2 tbsp ketchup"
+    ],
+    "steps": [
+      "Clean the chicken wings and pat them completely dry. Add a light coating of olive oil and toss to coat.",
+      "Season the wings with black pepper, onion powder, chili powder, smoked paprika, garlic powder, Italian seasoning, and Sazón, using 1.5 teaspoons of each.",
+      "Preheat the oven to 425°F. Arrange the wings in a single layer on a baking sheet and bake for 20 minutes.",
+      "Flip the wings and continue baking for another 20 - 25 minutes, or until fully cooked and browned.",
+      "While the wings finish baking, combine the melted butter, BBQ sauce, honey, and ketchup in a small saucepan. Simmer over low-medium heat for 10 - 15 minutes, stirring occasionally, until slightly thickened.",
+      "Transfer the cooked wings to a large bowl, pour over the honey-BBQ sauce, and toss until evenly coated. Serve hot."
+    ],
+    "file": "https://images.unsplash.com/photo-1766589221606-08bc21fa1acd?auto=format&fit=crop&fm=jpg&q=82&w=1600",
+    "source": "https://www.youtube.com/watch?v=i70b6KVevZI&t=112s"
+  },
+  {
+    "id": "seed-coconut-salmon",
+    "title": "Coconut Curry Salmon",
+    "author": "Nadia",
+    "department": "Grants & Compliance",
+    "category": "Dinner",
+    "prep": "15 min",
+    "cook": "20 min",
+    "servings": "4",
+    "origin": "Thai-inspired",
+    "story": "The dish I make when I want people to think I fussed for hours. Twenty minutes, start to finish, and the sauce does all the talking.",
+    "secret": "Don't crowd the pan searing the salmon, and build the curry sauce in the same skillet - every brown bit is flavor.",
+    "ingredients": [
+      "4 salmon fillets",
+      "1 can coconut milk",
+      "2 tbsp red curry paste",
+      "1 lime, juiced",
+      "2 cloves garlic, minced",
+      "1 thumb ginger, grated",
+      "Fresh cilantro"
+    ],
+    "steps": [
+      "Season the salmon and sear skin-side down until crisp, 3–4 min; set aside.",
+      "In the same pan, soften garlic and ginger, stir in curry paste.",
+      "Pour in coconut milk and lime; simmer until it thickens.",
+      "Nestle the salmon back in, spoon sauce over, finish with cilantro."
+    ],
+    "file": "https://easy-salmon-curry.pages.dev/images/easy-30-minute-salmon-curry-your-go-to-weeknight-m.jpg"
+  },
+  {
+    "id": "seed-cornbread",
+    "title": "Brown-Butter Cornbread",
+    "author": "Denise",
+    "department": "Facilities",
+    "category": "Appetizers",
+    "prep": "10 min",
+    "cook": "25 min",
+    "servings": "8",
+    "origin": "Southern",
+    "story": "Sunday church potlucks. If the pan came home empty, you knew you did it right.",
+    "secret": "Brown the butter until it smells nutty - that's the whole difference.",
+    "ingredients": [
+      "1 cup cornmeal",
+      "1 cup flour",
+      "1 tbsp baking powder",
+      "2 eggs",
+      "1 cup buttermilk",
+      "6 tbsp butter, browned",
+      "3 tbsp honey"
+    ],
+    "steps": [
+      "Brown the butter in a skillet until golden and fragrant.",
+      "Whisk dry ingredients; whisk wet ingredients separately.",
+      "Fold together with the browned butter, don't overmix.",
+      "Bake at 400°F for 22–25 min until the top springs back."
+    ],
+    "file": "https://s.alicdn.com/%40sc02/kf/Hbbb7d40e2e80497e83f3557e6974a494T.jpg_1200x1200.jpg"
+  },
+  {
+    "id": "seed-jollof",
+    "title": "Party Jollof Rice",
+    "author": "Amara",
+    "department": "IT",
+    "category": "Main Dishes",
+    "prep": "25 min",
+    "cook": "50 min",
+    "servings": "6",
+    "origin": "Nigerian",
+    "story": "Every gathering starts an argument over whose jollof is best. This is the one that ends it.",
+    "secret": "Let the bottom catch just a little - that smoky layer is the prize.",
+    "ingredients": [
+      "3 cups long-grain rice",
+      "6 tomatoes, blended",
+      "2 red bell peppers",
+      "2 onions",
+      "1/4 cup tomato paste",
+      "3 tbsp curry & thyme",
+      "2 cups stock"
+    ],
+    "steps": [
+      "Blend tomatoes, peppers and one onion; reduce with tomato paste.",
+      "Sauté the second onion, add spices, then the blended base.",
+      "Stir in rinsed rice and stock, cover tight.",
+      "Cook low until liquid absorbs and the bottom lightly crisps."
+    ],
+    "file": "https://i.etsystatic.com/53285972/r/il/051574/6136186695/il_1140xN.6136186695_24va.jpg"
+  },
+  {
+    "id": "seed-oxtail",
+    "title": "Sunday Braised Oxtail",
+    "author": "Grace",
+    "department": "Human Resources",
+    "category": "Dinner",
+    "prep": "30 min",
+    "cook": "3 hr",
+    "servings": "5",
+    "origin": "Dominican",
+    "story": "Low and slow, all afternoon. The house smells like my grandmother's kitchen by the time it's done.",
+    "secret": "Sear hard before you braise. Color is flavor.",
+    "ingredients": [
+      "3 lb oxtail",
+      "2 tbsp browning",
+      "1 onion",
+      "4 cloves garlic",
+      "2 carrots",
+      "1 can butter beans",
+      "Fresh thyme"
+    ],
+    "steps": [
+      "Season and sear the oxtail until deeply browned.",
+      "Sauté aromatics, deglaze, return the meat.",
+      "Braise covered on low for 2.5–3 hours.",
+      "Add butter beans in the last 20 minutes."
+    ],
+    "file": "https://a62a83fbf97718e8ae53.cdn6.editmysite.com/uploads/b/a62a83fbf97718e8ae53659c7b9ac62af480e7eb1ebd0e2eca2aa2bef440e0fd/AdobeStock_1413225113_1764475318.jpeg?dpr=2.625&fit=cover&height=480&optimize=medium&width=2400"
+  },
+  {
+    "id": "seed-salad",
+    "title": "Herbed Lunch Grain Bowl",
+    "author": "Priya",
+    "department": "Communications",
+    "category": "Lunch",
+    "prep": "15 min",
+    "cook": "20 min",
+    "servings": "3",
+    "origin": "Family Recipe",
+    "story": "The desk lunch that actually holds up till 1 p.m. without wilting.",
+    "secret": "Dress the grains while they're still warm so they soak up the vinaigrette.",
+    "ingredients": [
+      "1 cup farro",
+      "1 cucumber, diced",
+      "1 cup cherry tomatoes",
+      "1/2 cup feta",
+      "1/4 cup mint & parsley",
+      "3 tbsp olive oil",
+      "1 lemon"
+    ],
+    "steps": [
+      "Cook farro until tender, drain.",
+      "Whisk lemon and olive oil; toss with warm farro.",
+      "Fold in vegetables, herbs and feta.",
+      "Chill 20 min and pack for the week."
+    ],
+    "file": "https://images.mrcook.app/recipe-image/01930c3b-a4ae-7ce3-8e6e-e44f1f1e5f5f?cacheKey=U3VuLCAxMiBKYW4gMjAyNSAwMzozODoyNCBHTVQ%3D"
+  },
+  {
+    "id": "seed-peach",
+    "title": "Skillet Peach Cobbler",
+    "author": "Robert",
+    "department": "Legal",
+    "category": "Desserts",
+    "prep": "15 min",
+    "cook": "40 min",
+    "servings": "8",
+    "origin": "Southern",
+    "story": "Retirement parties, birthdays, ordinary Tuesdays. There's never a bad time.",
+    "secret": "A splash of bourbon in the peaches. You didn't hear it from me.",
+    "ingredients": [
+      "6 ripe peaches, sliced",
+      "1 cup sugar",
+      "1 cup flour",
+      "1 tbsp baking powder",
+      "3/4 cup milk",
+      "1 stick butter",
+      "1 tsp cinnamon"
+    ],
+    "steps": [
+      "Melt butter in a cast-iron skillet in the oven.",
+      "Whisk batter and pour over the melted butter.",
+      "Spoon peaches and their juices on top - don't stir.",
+      "Bake at 375°F for 40 min until golden and bubbling."
+    ],
+    "file": "https://dhgf5mcbrms62.cloudfront.net/105325767/global/fSBGyhf-1200x1200.jpg"
+  },
+  {
+    "id": "seed-frittata",
+    "title": "Weekend Veggie Frittata",
+    "author": "Sam",
+    "department": "Development",
+    "category": "Breakfast",
+    "prep": "10 min",
+    "cook": "20 min",
+    "servings": "4",
+    "origin": "Family Recipe",
+    "story": "The dish that empties the crisper drawer and still tastes like you tried.",
+    "secret": "Finish it under the broiler for 2 minutes to puff the top.",
+    "ingredients": [
+      "8 eggs",
+      "1/2 cup milk",
+      "1 cup spinach",
+      "1/2 red onion",
+      "1 bell pepper",
+      "1/2 cup cheddar",
+      "Salt & pepper"
+    ],
+    "steps": [
+      "Sauté onion and pepper in an oven-safe skillet.",
+      "Add spinach until wilted.",
+      "Pour in whisked eggs and milk, top with cheese.",
+      "Bake at 375°F 15 min, broil 2 min to finish."
+    ],
+    "file": "https://itsonly.recipes/images/recipeimages/garden-frittata.webp"
+  },
+  {
+    "id": "seed-punch",
+    "title": "Ginger Sorrel Punch",
+    "author": "Yvette",
+    "department": "Reception",
+    "category": "Drinks & Sides",
+    "prep": "15 min",
+    "cook": "0 min",
+    "servings": "10",
+    "origin": "Caribbean",
+    "story": "Christmas in a glass. My mother made gallons and it was gone by noon.",
+    "secret": "Steep the sorrel overnight - patience is the recipe.",
+    "ingredients": [
+      "2 cups dried sorrel",
+      "1 thumb ginger, grated",
+      "6 cloves",
+      "1 cinnamon stick",
+      "1 cup sugar",
+      "8 cups water",
+      "Orange peel"
+    ],
+    "steps": [
+      "Boil water with ginger, cloves and cinnamon.",
+      "Pour over sorrel and sugar, add orange peel.",
+      "Steep overnight in the fridge.",
+      "Strain, adjust sweetness, and serve over ice."
+    ],
+    "file": "https://media.sunbasket.com/2017/12/32e2e9c6-5d8c-4448-baff-27066371cbcd1800.jpg"
+  }
+];
+const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(s)];
+let activeMood='All', tonight=RECIPES[0], featured=RECIPES[0];
+const moods=['All','Dinner','Breakfast','Appetizers','Desserts','Drinks','Quick','Shareable','Vegetarian','Vegan'];
+function img(r){return r.file||''}
+function totalMins(r){const nums=[r.prep,r.cook].map(v=>parseInt(v)||0);return nums[0]+nums[1]}
+function matchesMood(r,m){if(m==='All')return true;if(['Dinner','Breakfast','Appetizers','Desserts','Drinks'].includes(m))return r.category===m;if(m==='Quick')return totalMins(r)<=35;if(m==='Vegetarian')return /grain|frittata|cornbread|cobbler|cauliflower/i.test(r.title)||r.origin==='Vegan';if(m==='Vegan')return r.origin==='Vegan';if(m==='Shareable')return /cornbread|jollof|cobbler|punch|oxtail/i.test(r.title);return true}
+function openRecipe(r){$('#recipeBody').innerHTML=`<div class="recipe-detail"><div class="detail-photo"><img src="${img(r)}" alt="${r.title}"></div><div class="detail-main"><div class="detail-kicker">${r.category}${r.origin?' · '+r.origin:''}</div><h2 class="detail-title">${r.title}</h2><div class="detail-by">By <strong>${r.author}</strong>${r.department?' · '+r.department:''}</div><div class="detail-story">“${r.story||'A recipe shared from our kitchen to yours.'}”</div><div class="detail-facts"><div class="fact"><span>Prep</span><strong>${r.prep||'—'}</strong></div><div class="fact"><span>Cook</span><strong>${r.cook||'—'}</strong></div><div class="fact"><span>Serves</span><strong>${r.servings||'—'}</strong></div></div><div class="detail-grid"><div><h4>What you'll need</h4><ul class="ingredients">${r.ingredients.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h4>Make it</h4><div class="steps">${r.steps.map((x,i)=>`<div class="step"><b>${String(i+1).padStart(2,'0')}</b><span>${x}</span></div>`).join('')}</div></div></div>${r.secret?`<div class="secret"><strong>${r.author}'s secret</strong>${r.secret}</div>`:''}</div></div>`;$('#recipeModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(id){$(id).classList.remove('open');document.body.style.overflow=''}
+function renderFeatured(){featured=RECIPES.find(r=>r.id==='seed-coconut-salmon')||RECIPES[0];$('#featuredImage').src=img(featured);$('#featuredImage').alt=featured.title;$('#featuredTitle').textContent=featured.title;$('#featuredStory').textContent=featured.story}
+function renderMoods(){$('#moods').innerHTML=moods.map(m=>`<button class="mood ${m===activeMood?'active':''}" data-mood="${m}">${m}</button>`).join('');$$('.mood').forEach(b=>b.onclick=()=>{activeMood=b.dataset.mood;renderMoods();renderRecipes()})}
+function renderFeatureGrid(){const picks=RECIPES.slice(0,5);$('#featureGrid').innerHTML=picks.map(r=>`<article class="recipe-tile"><img src="${img(r)}" alt="${r.title}"><div class="tile-copy"><small>${r.category} · ${r.origin||'From our kitchens'}</small><h3>${r.title}</h3><span>${r.author}${r.department?' · '+r.department:''}</span></div><button class="tile-btn" aria-label="Open ${r.title}" data-id="${r.id}">Open</button></article>`).join('');$$('.tile-btn').forEach(b=>b.onclick=()=>openRecipe(RECIPES.find(r=>r.id===b.dataset.id)))}
+function renderRecipes(){const q=$('#search').value.trim().toLowerCase();const filtered=RECIPES.filter(r=>matchesMood(r,activeMood)&&(!q||[r.title,r.author,r.department,r.category,r.origin,r.story,...r.ingredients].join(' ').toLowerCase().includes(q)));$('#count').textContent=`${filtered.length} recipe${filtered.length===1?'':'s'}`;$('#recipeList').innerHTML=filtered.map(r=>`<article class="recipe-row"><img src="${img(r)}" alt="${r.title}"><div><div class="cat">${r.category}${r.origin?' · '+r.origin:''}</div><h3>${r.title}</h3><p>${r.story||''}</p><div class="meta"><span>${r.author}</span><span>${r.prep||'—'} prep</span><span>${r.cook||'—'} cook</span></div></div><button class="row-btn" aria-label="Open ${r.title}" data-id="${r.id}">Open</button></article>`).join('');$$('.row-btn').forEach(b=>b.onclick=()=>openRecipe(RECIPES.find(r=>r.id===b.dataset.id)))}
+function chooseTonight(){tonight=RECIPES[Math.floor(Math.random()*RECIPES.length)];$('#tonightTitle').textContent=tonight.title;$('#tonightStory').textContent=tonight.story||`${tonight.prep} prep · ${tonight.cook} cook.`}
+function openShare(){$('#shareModal').classList.add('open');document.body.style.overflow='hidden'}
+function formatSubmission(){const v=id=>$(id).value.trim();const ingredients=v('#fIngredients').split('\n').map(x=>x.trim()).filter(Boolean);const steps=v('#fSteps').split('\n').map(x=>x.trim()).filter(Boolean);return `THE INTERCHURCH TABLE - RECIPE SUBMISSION\n\nRecipe: ${v('#fTitle')}\nContributor: ${v('#fAuthor')}\nDepartment/Team: ${v('#fDept')||'—'}\nCategory: ${v('#fCategory')}\nCulture/Origin: ${v('#fOrigin')||'—'}\nPrep Time: ${v('#fPrep')||'—'}\nCook Time: ${v('#fCook')||'—'}\nServings: ${v('#fServings')||'—'}\n\nINGREDIENTS\n${ingredients.map(x=>'• '+x).join('\n')}\n\nPREPARATION\n${steps.map((x,i)=>`${i+1}. ${x}`).join('\n')}\n\nTHE STORY\n${v('#fStory')||'—'}\n\nBEST TIP / SECRET\n${v('#fSecret')||'—'}`}
+async function copyText(){const text=formatSubmission();try{await navigator.clipboard.writeText(text);$('#shareStatus').textContent='Standardized recipe copied.'}catch(e){$('#shareStatus').textContent='Copy failed. Select the text manually after sending.'}}
+$('#recipeForm').addEventListener('submit',async e=>{e.preventDefault();const text=formatSubmission();const file=$('#fPhoto').files[0];const data={title:`The Interchurch Table - ${$('#fTitle').value.trim()}`,text};if(file&&navigator.canShare&&navigator.canShare({files:[file]}))data.files=[file];if(navigator.share){try{await navigator.share(data);$('#shareStatus').textContent='Recipe ready to share.';return}catch(err){if(err.name==='AbortError')return}}await copyText();$('#shareStatus').textContent='Your browser cannot open the share sheet, so the formatted recipe was copied. Paste it into email or Teams and attach the photo.'})
+$('#copyRecipe').onclick=copyText;$('#search').addEventListener('input',renderRecipes);$('#closeRecipe').onclick=()=>closeModal('#recipeModal');$('#closeShare').onclick=()=>closeModal('#shareModal');$('#recipeModal').onclick=e=>{if(e.target.id==='recipeModal')closeModal('#recipeModal')};$('#shareModal').onclick=e=>{if(e.target.id==='shareModal')closeModal('#shareModal')};
+$('#featuredOpen').onclick=()=>openRecipe(featured);$('#tonightOpen').onclick=()=>openRecipe(tonight);$('#chooseAgain').onclick=chooseTonight;$('#surpriseBtn').onclick=()=>{chooseTonight();document.querySelector('.story-strip').scrollIntoView({behavior:'smooth'})};$('#exploreBtn').onclick=()=>$('#collection').scrollIntoView({behavior:'smooth'});$('#browseTop').onclick=()=>$('#collection').scrollIntoView({behavior:'smooth'});['#shareTop','#shareMain'].forEach(id=>$(id).onclick=openShare);
+
+const landingCover=$('#landingCover'); const landingSeal=$('#landingSeal');
+if(landingSeal){
+  landingSeal.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      const toggle=document.getElementById('openBookToggle');
+      if(toggle) toggle.checked=true;
+      landingCover.classList.add('open');
+    }
+  });
+}
+if(landingCover){landingCover.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){landingCover.classList.add('open')}});}
+
+renderFeatured();renderMoods();renderFeatureGrid();renderRecipes();chooseTonight();
+</script>
+</body></html>
